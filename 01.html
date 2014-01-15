@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script type="text/javascript" src="../d3/d3.v3.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            // Your beautiful D3 code will go here
+            var licenses;
+            d3.csv("data/lic.csv", function(error, data) {
+            						if (error) {
+            							console.log("Error code: " + error);
+            						}
+            						licenses = data;
+            						console.log(licenses); 
+            						createPara();
+            						}
+            		);
+            function createPara() {
+            	d3.select("body")
+            	.selectAll("p")
+            	.data(licenses)
+            	.enter()
+            	.append("p")
+            	.text(Software);
+
+            }
+            
+            function Software(d){
+            	return d.Software;
+            }
+            function License(d){
+            	return d.License;
+            }
+        </script>
+    </body>
+</html>
