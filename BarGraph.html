@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>D3 Page Template</title>
+        <script type="text/javascript" src="../d3/d3.v3.js"></script>
+    </head>
+    <body>
+        <script type="text/javascript">
+            var dataset = [10, 38, 78, 13, 43, 124, 89, 3, 9, 44];
+            var svgW = 600;
+            var svgH = 200;
+            var barPadding = 2;
+            
+            // Create SVG Canvas
+            var svg = drawCanvas();
+            
+            // Draw bar graph with dataset
+            drawBarGraph();
+
+                    
+                    
+             
+            //-------- Functions-----------//      
+        
+	        function drawCanvas() {
+	        	return d3.select("body")
+	        			.append("svg")
+	        			.attr({width: svgW,
+	        					height: svgH
+	        					});
+	        }
+	        
+	        function drawBarGraph() {
+	        	return svg.selectAll("rect")
+	        		.data(dataset)
+	        		.enter()
+	        		.append("rect")
+	        		.attr({
+	        				x: function(d, i) {
+	        						return i * (svgW / dataset.length); 
+	        					},
+	        		
+	        				y: function(d, i) {
+	        						return svgH - d;
+	        						},
+	        		
+	        				width: function(d, i) {
+	        						return (svgW / dataset.length - barPadding);
+	        						},
+	        		
+	        				height: function(d, i) {
+	        						return d;
+	        		            	}
+	        		    });
+	        }	
+            
+        </script>
+    </body>
+</html>
