@@ -1,3 +1,5 @@
 *espresso*
-**/myd3-proj.esproj/Project.espressostorage
+*.espresso*
+//myd3-proj.esproj/*Project*
 *~
+*.swp

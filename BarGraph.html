@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -6,7 +7,9 @@
         <script type="text/javascript" src="../d3/d3.v3.js"></script>
     </head>
     <body>
-        <script type="text/javascript">
+    	
+    	
+    	<script type="text/javascript">
             var dataset = [10, 38, 78, 13, 43, 124, 89, 3, 9, 44];
             var svgW = 600;
             var svgH = 200;
@@ -17,6 +20,7 @@
             
             // Draw bar graph with dataset
             drawBarGraph();
+            drawLabels();
 
                     
                     
@@ -54,7 +58,38 @@
 	        		            	}
 	        		    });
 	        }	
+	        
+	        function drawLabels() {
+	        	var px = 10;
+	        	return svg.selectAll("text")
+	        				.data(dataset)
+	        				.enter()
+	        				.append("text")
+	        				.text(function(d) { return d;})
+	        				.attr({
+	        						x: function(d,i) {
+	        							return i * (svgW / dataset.length) + (svgW / dataset.length - barPadding) / 2;
+	        							},
+	        						y: function(d) {
+		        							var textY = svgH - d;
+		        							if (d < px) {
+	    	    								return textY;
+	        								}else return textY + px - 1;
+	        							},
+	        						fill: function(d) {
+	        							if (d < px)
+		        							return "red";
+		        						return "white";
+	        						}
+	        				})
+	        				.attr("text-anchor", "middle")
+	        				.attr("font-family", "sans-serif")
+	        				.attr("font-size", px+"px");
+	        				
+	        }
+	        
             
         </script>
+        
     </body>
 </html>
